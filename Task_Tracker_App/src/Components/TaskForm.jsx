@@ -24,7 +24,7 @@ const TaskForm = ({ isOpen, onClose }) => {
 
     {isOpen &&  <form
         action=""
-        className="flex flex-col row-span-5 row-start-3 gap-3 rounded-lg shadoe-md bg-[#ffffff] p-2 text-text-dark w-full md:min-w-[400px]"
+        className="flex flex-col mt-[25rem] md:mx-[30rem] gap-3 rounded-lg shadoe-md bg-[#ffffff] p-2 text-text-dark self-center md:max-w-[400px] z-20"
         onSubmit={handleSubmit}
         data-aos="fade-down"
       >
