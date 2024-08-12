@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const TaskForm = ({ isOpen, onClose }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+
+    useEffect(() => {
+        AOS.init({
+          duration: 1200, 
+        });
+      }, []);
+
      const handleSubmit = (e)=>{
         e.preventDefault();
         setTitle("");
@@ -15,8 +24,9 @@ const TaskForm = ({ isOpen, onClose }) => {
 
     {isOpen &&  <form
         action=""
-        className={`flex flex-col row-span-5 row-start-3 gap-3 rounded-lg shadoe-md bg-[#ffffff] p-2 text-text-dark w-full`}
+        className="flex flex-col row-span-5 row-start-3 gap-3 rounded-lg shadoe-md bg-[#ffffff] p-2 text-text-dark w-full md:min-w-[400px]"
         onSubmit={handleSubmit}
+        data-aos="fade-down"
       >
         <h2 className="self-center font-extrabold text-xl">Add new Task</h2>
         <div className="flex flex-col gap-3">

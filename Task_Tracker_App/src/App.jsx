@@ -8,7 +8,7 @@ import TaskForm from "./Components/TaskForm";
 function App() {
   return (
     <>
-      <div className="fixed top-0 right-0 left-0 grid grid-rows-10 max-w-screen w-screen max-w-full items-center justify-center h-fit border border-black ">
+      <div className="fixed top-0 right-0 left-0 grid grid-rows-10 max-w-screen w-screen max-w-full items-center justify-center h-screen border border-black ">
         <Header /> 
 
       </div>

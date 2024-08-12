@@ -3,6 +3,8 @@ import TaskForm from "./TaskForm";
 
 const Header = ()=>{
     const [isOpen, setIsOpen] = useState(false);
+
+    
     return(
         <>
             <div className="absolute top-1 right-0 left-0 row-span-1 bg-primary-blue max-w-screen  h-fit flex justify-between p-1 items-center py-2 rounded-md">
