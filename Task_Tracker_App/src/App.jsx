@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -7,10 +7,22 @@ import TaskForm from "./Components/TaskForm";
 import TaskList from "./Components/TaskList";
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    setTasks(storedTasks);
+  }, []);
+
+  const addTask = (task) => {
+    const updatedTasks = [...tasks, task];
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  };
   return (
     <>
       <div className="fixed top-0 right-0 left-0 grid grid-rows-10 max-w-screen w-screen max-w-full  h-screen border border-black ">
-        <Header /> 
+        <Header onAddTask={addTask} />
         <TaskList />
       </div>
     </>
