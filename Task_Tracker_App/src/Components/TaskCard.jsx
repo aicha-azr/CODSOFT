@@ -1,16 +1,51 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TaskCard = () =>{
-    const [isCompleted, setIsCompleted] = useState(false);
+    const [tasks, setTasks] = useState([]);
+    const [completedIndexes, setCompletedIndexes] = useState({});
+    useEffect(()=>{
+        const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+        if (Array.isArray(storedTasks)) {
+            setTasks(storedTasks);
+          } else {
+            setTasks([]); 
+          }
+    },[])
+    
+    const toggleCompletion = (index) => {
+        setCompletedIndexes((prev) => ({
+          ...prev,
+          [index]: !prev[index],
+        }));
+      };
     return(
         <>
-            <div className="flex justify-between border border-border-light rounded-md text-text-dark items-center w-full p-1 ">
+           { tasks.map((item, index)=> ( <div className="flex justify-between border border-border-light rounded-md text-text-dark items-center w-full p-1 " key={index}  >
                 <div className="flex flex-col items-start p-1 gap-1.5">
-                <h2 className="font-bold text-2xl">title</h2>
-                <p className="text-secondary-gray">description</p>
+                <h2
+                className={`font-bold text-2xl ${
+                  completedIndexes[index] ? "line-through" : ""
+                }`}
+              >
+                {item.title}
+              </h2>
+                <p className="text-secondary-gray">{item.description}</p>
                 <div className="flex">
-                <input type="checkbox" name="completed" value="completed" className="focus:bg-primary-green" onClick={()=>setIsCompleted(!isCompleted)}/>
-               {isCompleted?( <label for="completed" className="text-primary-green">Completed</label>): ( <label for="completed">Incompleted</label>)}
+                <input
+                  type="checkbox"
+                  name="completed"
+                  value="completed"
+                  className="focus:bg-primary-green"
+                  checked={!!completedIndexes[index]}
+                  onChange={() => toggleCompletion(index)}
+                />
+                <label
+                  htmlFor="completed"
+                  className={completedIndexes[index] ? "text-primary-green" : ""}
+                >
+                  {completedIndexes[index] ? "Completed" : "Incompleted"}
+                </label>
+              
                 </div>
                 </div>
 
@@ -18,8 +53,9 @@ const TaskCard = () =>{
                     <button className="hover:bg-accent-yellow hover:text-[#ffffff] rounded-xl shadow-sm hover:font-semibold hover:ring-0 focus:outline-none">Edit</button>
                     <button className="hover:bg-accent-red hover:text-[#ffffff] rounded-xl shadow-sm hover:font-semibold hover:ring-0 focus:outline-none">Delete</button>
                 </div>
-            </div> 
-          
+            </div> ))
+           
+          }
         </>
     )
 }

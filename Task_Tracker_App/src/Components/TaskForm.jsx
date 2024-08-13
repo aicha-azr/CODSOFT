@@ -14,6 +14,14 @@ const TaskForm = ({ isOpen, onClose }) => {
 
      const handleSubmit = (e)=>{
         e.preventDefault();
+        // create a task object
+        const task = {title, description}
+        const existingTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        // add new task to the existing list
+        existingTasks.push(task);
+        // save the list updated in the localStorgae
+        localStorage.setItem('tasks', JSON.stringify(existingTasks));
+        //reset the form and close it
         setTitle("");
         setDescription("");
         if (onClose) onClose();
@@ -55,12 +63,12 @@ const TaskForm = ({ isOpen, onClose }) => {
           />
         </div>
         <div className="flex gap-3 self-center">
-          <button className="bg-primary-blue hover:bg-[#0056b3] hover:text-white shadow-md font-semibold"
+          <button className="bg-primary-blue hover:bg-[#0056b3] hover:text-white shadow-md font-semibold focus:outline-none"
           type="submit">
             Save
           </button>
           <button
-            className=" hover:bg-secondary-gray hover:text-white shadow-md font-semibold"
+            className=" hover:bg-secondary-gray hover:text-white shadow-md font-semibold focus:outline-none"
             onClick={() => onClose()}
           >
             Cancel
