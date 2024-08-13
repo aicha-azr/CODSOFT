@@ -25,8 +25,8 @@ function App() {
     console.log(updated)
     setTasks(updated);
     localStorage.setItem("tasks", JSON.stringify(updated));
+}
 
-  }
   return (
     <>
       <div className="fixed top-0 right-0 left-0 grid grid-rows-10 max-w-screen w-screen max-w-full  h-screen border border-black ">
