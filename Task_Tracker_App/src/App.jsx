@@ -23,7 +23,7 @@ function App() {
     <>
       <div className="fixed top-0 right-0 left-0 grid grid-rows-10 max-w-screen w-screen max-w-full  h-screen border border-black ">
         <Header onAddTask={addTask} />
-        <TaskList />
+        <TaskList tasks={tasks}/>
       </div>
     </>
   );
