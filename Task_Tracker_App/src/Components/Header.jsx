@@ -1,5 +1,6 @@
 import { useState } from "react";
 import TaskForm from "./TaskForm";
+import { Toaster } from "react-hot-toast";
 
 const Header = ({ onAddTask }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,7 @@ const Header = ({ onAddTask }) => {
           add Task
         </button>
       </div>
+      <Toaster position="top-center" autoClose={6000} />
       <TaskForm
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
