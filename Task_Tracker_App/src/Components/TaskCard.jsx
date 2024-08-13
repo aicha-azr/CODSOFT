@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const TaskCard = ({task, key}) =>{
+const TaskCard = ({task, index, deleteTask}) =>{
     
     const [completedIndexes, setCompletedIndexes] = useState({});
     
@@ -16,7 +16,7 @@ const TaskCard = ({task, key}) =>{
                 <div className="flex flex-col items-start p-1 gap-1.5">
                 <h2
                 className={`font-bold text-2xl ${
-                  completedIndexes[key] ? "line-through" : ""
+                  completedIndexes[index] ? "line-through" : ""
                 }`}
               >
                 {task.title}
@@ -28,14 +28,14 @@ const TaskCard = ({task, key}) =>{
                   name="completed"
                   value="completed"
                   className="focus:bg-primary-green"
-                  checked={!!completedIndexes[key]}
-                  onChange={() => toggleCompletion(key)}
+                  checked={!!completedIndexes[index]}
+                  onChange={() => toggleCompletion(index)}
                 />
                 <label
                   htmlFor="completed"
-                  className={completedIndexes[key] ? "text-primary-green" : ""}
+                  className={completedIndexes[index] ? "text-primary-green" : ""}
                 >
-                  {completedIndexes[key] ? "Completed" : "Incompleted"}
+                  {completedIndexes[index] ? "Completed" : "Incompleted"}
                 </label>
               
                 </div>
@@ -43,7 +43,7 @@ const TaskCard = ({task, key}) =>{
 
                 <div className="flex gap-1 self-end">
                     <button className="hover:bg-accent-yellow hover:text-[#ffffff] rounded-xl shadow-sm hover:font-semibold hover:ring-0 focus:outline-none">Edit</button>
-                    <button className="hover:bg-accent-red hover:text-[#ffffff] rounded-xl shadow-sm hover:font-semibold hover:ring-0 focus:outline-none">Delete</button>
+                    <button className="hover:bg-accent-red hover:text-[#ffffff] rounded-xl shadow-sm hover:font-semibold hover:ring-0 focus:outline-none" onClick={()=>deleteTask(index)}>Delete</button>
                 </div>
             </div> 
         </>

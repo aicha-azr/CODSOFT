@@ -3,7 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import toast, { Toaster } from 'react-hot-toast';
 
-const TaskForm = ({ isOpen, onClose, addTask }) => {
+const TaskForm = ({ isOpen, onClose, addTask, tasks }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const notify = () => {
@@ -13,6 +13,10 @@ const TaskForm = ({ isOpen, onClose, addTask }) => {
   const warningMessage = () => {
     toast.warning("the title is required!");
   };
+  const errorMessage = ()=>{
+    console.log('error');
+    toast.error('the task is not added ')
+  }
   useEffect(() => {
     AOS.init({
       duration: 1200,
@@ -29,7 +33,9 @@ const TaskForm = ({ isOpen, onClose, addTask }) => {
     }
     const task = { title, description };
     addTask(task);
-    notify();
+    
+      notify();
+
     setTitle("");
     setDescription("");
     if (onClose) onClose();
@@ -39,10 +45,10 @@ const TaskForm = ({ isOpen, onClose, addTask }) => {
     <>
       {isOpen && (
         <>
-          <div className="fixed inset-0 bg-black opacity-50 z-10"></div>
+          <div className="fixed  inset-0 bg-black opacity-50 z-10"></div>
           <form
             action=""
-            className="flex flex-col mt-[25rem] md:mx-[30rem] gap-3 rounded-lg shadow-md bg-[#ffffff] p-2 text-text-dark self-center md:max-w-[400px] z-20"
+            className="flex flex-col mt-[25rem] md:mx-[25rem] gap-3 rounded-lg shadow-md bg-[#ffffff] p-2 text-text-dark self-center md:max-w-[400px] z-20"
             onSubmit={handleSubmit}
             data-aos="fade-down"
           >

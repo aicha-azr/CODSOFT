@@ -2,7 +2,7 @@ import { useState } from "react";
 import TaskForm from "./TaskForm";
 import { Toaster } from "react-hot-toast";
 
-const Header = ({ onAddTask }) => {
+const Header = ({ onAddTask, tasks }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -21,6 +21,7 @@ const Header = ({ onAddTask }) => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         addTask={onAddTask}
+        tasks={tasks}
       />
     </>
   );
