@@ -62,6 +62,7 @@ const TaskForm = ({ isOpen, onClose, addTask, tasks }) => {
                 name="title"
                 placeholder="write the task title..."
                 className="p-1 border border-border-light focus:outline-none fucus:ring-0"
+                maxLength="35"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
@@ -74,6 +75,7 @@ const TaskForm = ({ isOpen, onClose, addTask, tasks }) => {
                 name="description"
                 className="p-1 border border-border-light focus:outline-none fucus:ring-0 resize-none"
                 placeholder="write the task description..."
+                maxLength="70"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />

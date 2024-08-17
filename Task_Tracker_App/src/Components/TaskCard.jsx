@@ -18,16 +18,16 @@ const TaskCard = ({ task, index, deleteTask}) => {
  }
   return (
     <>
-      <div className="flex justify-between border border-border-light rounded-md text-text-dark items-center w-full p-1 ">
-        <div className="flex flex-col items-start p-1 gap-1.5">
+      <div className="grid grid-cols-3 grid-rows-3 md:grid-rows-2 md:flex-row  border border-border-light rounded-md text-text-dark p-1 w-full ">
+        <div className="col-span-3 md:col-span-2 flex flex-col self-start items-start p-1 gap-1.5 w-fit  md:w-auto overflow-hidden text-ellipsis whitespace-wrap row-span-3">
           <h2
-            className={`font-bold text-2xl ${
+            className={`font-bold text-2xl text-start  ${
               completedIndexes[index] ? "line-through" : ""
             }`}
           >
             {task.title}
           </h2>
-          <p className="text-secondary-gray">{task.description}</p>
+          <p className="text-secondary-gray break-words text-start">{task.description}</p>
           <div className="flex">
             <input
               type="checkbox"
@@ -46,15 +46,15 @@ const TaskCard = ({ task, index, deleteTask}) => {
           </div>
         </div>
 
-        <div className="flex gap-1 self-end">
+        <div className="md:col-span-3 md:col-start-3 items-end md:row-start-2 col-start-3 w-full text-sm md:text-md flex justify-end gap-3">
           <button
-            className="hover:bg-accent-yellow hover:text-[#ffffff] rounded-xl shadow-sm hover:font-semibold hover:ring-0 focus:outline-none"
+            className="hover:bg-accent-yellow hover:text-[#ffffff] rounded-xl  shadow-sm hover:font-semibold hover:ring-0 focus:outline-none w-fit"
             onClick={() => setOpenEditForm(true)}
           >
             Edit
           </button>
           <button
-            className="hover:bg-accent-red hover:text-[#ffffff] rounded-xl shadow-sm hover:font-semibold hover:ring-0 focus:outline-none"
+            className="hover:bg-accent-red hover:text-[#ffffff] rounded-xl shadow-sm hover:font-semibold hover:ring-0 focus:outline-none w-fit"
             onClick={() => deleteTask(index)}
           >
             Delete
@@ -63,10 +63,11 @@ const TaskCard = ({ task, index, deleteTask}) => {
       </div>
       {openEditForm && (
         <>
-          <div className="fixed  inset-0 bg-black opacity-50 z-20"></div>
+          <div className="fixed  inset-0 bg-black opacity-50 z-20 "></div>
+          <div className="flex justify-center absolute right-0 left-0 ">
           <form
             action=""
-            className="flex flex-col gap-3 rounded-lg shadow-md bg-[#ffffff] p-2 text-text-dark self-center md:min-w-[400px] absolute z-30"
+            className="flex flex-col gap-3 rounded-lg shadow-md bg-[#ffffff] p-2 text-text-dark self-center  md:min-w-[400px] min-w-[300px] z-30"
             data-aos="fade-down"
           >
             <h2 className="self-center font-extrabold text-xl">Add new Task</h2>
@@ -111,6 +112,7 @@ const TaskCard = ({ task, index, deleteTask}) => {
               </button>
             </div>
           </form>
+          </div>
         </>
       )}
     </>
