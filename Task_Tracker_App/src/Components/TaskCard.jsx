@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import TaskForm from "./TaskForm";
 
-const TaskCard = ({ task, index, deleteTask}) => {
+const TaskCard = ({ task, index, deleteTask, updateTask}) => {
   const [read, setRead] = useState(task);
   console.log(read);
   const [completedIndexes, setCompletedIndexes] = useState({});
@@ -16,6 +16,11 @@ const TaskCard = ({ task, index, deleteTask}) => {
     const { name, value } = e.target;
     setRead((prev) => ({ ...prev, [name]: value }));
  }
+const handleUpdate = (e)=>{
+  e.preventDefault;
+  updateTask(index, read);
+  setOpenEditForm(false);
+}
   return (
     <>
       <div className="grid grid-cols-3 grid-rows-3 md:grid-rows-2 md:flex-row  border border-border-light rounded-md text-text-dark p-1 w-full ">
@@ -69,6 +74,7 @@ const TaskCard = ({ task, index, deleteTask}) => {
             action=""
             className="flex flex-col gap-3 rounded-lg shadow-md bg-[#ffffff] p-2 text-text-dark self-center  md:min-w-[400px] min-w-[300px] z-30"
             data-aos="fade-down"
+            onSubmit={handleUpdate}
           >
             <h2 className="self-center font-extrabold text-xl">Add new Task</h2>
             <div className="flex flex-col gap-3">

@@ -25,13 +25,19 @@ function App() {
     console.log(updated)
     setTasks(updated);
     localStorage.setItem("tasks", JSON.stringify(updated));
+} 
+//update the Task
+const updateTask = (index, updatedTask)=>{
+    const task = [...tasks];
+    task[index] = updatedTask;
+    setTasks(task);
 }
 
   return (
     <>
-      <div className="fixed top-0 right-0 left-0 grid grid-rows-10 max-w-screen w-screen max-w-full  h-screen border border-black ">
+      <div className="fixed top-0 right-0 left-0 grid grid-rows-10 max-w-screen w-screen max-w-full  h-screen">
         <Header onAddTask={addTask} tasks={tasks} />
-        <TaskList tasks={tasks} onDelete={deleteTask}/>
+        <TaskList tasks={tasks} onDelete={deleteTask} onUpdate={updateTask}/>
       </div>
     </>
   );
