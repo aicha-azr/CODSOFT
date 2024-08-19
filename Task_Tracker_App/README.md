@@ -49,9 +49,9 @@ This project uses Tailwind CSS for styling. Ensure you have Tailwind CSS set up 
 ## Contributing
 If you would like to contribute to this project, please fork the repository and submit a pull request with your proposed changes.
 ## Project Screenshot
-![Project Screenshot](./assets/picture1.png)
-![Project Screenshot](./assets/picture2.png)
-![Project Screenshot](./assets/picture_3.png)
+![Project Screenshot](https://github.com/aicha-azr/CODSOFT/blob/main/Task_Tracker_App/src/assets/picture2.png)
+![Project Screenshot](https://github.com/aicha-azr/CODSOFT/blob/main/Task_Tracker_App/src/assets/picture1.png)
+![Project Screenshot](https://github.com/aicha-azr/CODSOFT/blob/main/Task_Tracker_App/src/assets/picture%203.png)
 
  
   
