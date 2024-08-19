@@ -31,6 +31,8 @@ const updateTask = (index, updatedTask)=>{
     const task = [...tasks];
     task[index] = updatedTask;
     setTasks(task);
+    localStorage.setItem("tasks", JSON.stringify(task));
+
 }
 
   return (

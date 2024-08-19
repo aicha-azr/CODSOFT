@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import TaskForm from "./TaskForm";
+import toast, { Toaster } from "react-hot-toast";
 
 const TaskCard = ({ task, index, deleteTask, updateTask}) => {
   const [read, setRead] = useState(task);
   console.log(read);
   const [completedIndexes, setCompletedIndexes] = useState({});
   const [openEditForm, setOpenEditForm] = useState(false);
+  const notify=()=> toast.success("The task is updated successfully");
+ 
   const toggleCompletion = (index) => {
     setCompletedIndexes((prev) => ({
       ...prev,
@@ -20,6 +23,7 @@ const handleUpdate = (e)=>{
   e.preventDefault;
   updateTask(index, read);
   setOpenEditForm(false);
+  notify();
 }
   return (
     <>
@@ -118,6 +122,7 @@ const handleUpdate = (e)=>{
               </button>
             </div>
           </form>
+          <Toaster position="top-center" autoClose={6000} />
           </div>
         </>
       )}

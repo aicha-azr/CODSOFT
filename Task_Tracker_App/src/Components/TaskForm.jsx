@@ -46,9 +46,10 @@ const TaskForm = ({ isOpen, onClose, addTask, tasks }) => {
       {isOpen && (
         <>
           <div className="fixed  inset-0 bg-black opacity-50 z-10"></div>
+          <div className="flex justify-center items-center top-20 absolute right-0 left-0">
           <form
             action=""
-            className="flex flex-col mt-[25rem] md:mx-[25rem] gap-3 rounded-lg shadow-md bg-[#ffffff] p-2 text-text-dark self-center md:max-w-[400px] z-20"
+            className="flex flex-col gap-3 rounded-lg shadow-md bg-[#ffffff] p-2 text-text-dark self-center  md:min-w-[400px] min-w-[300px] z-30"
             onSubmit={handleSubmit}
             data-aos="fade-down"
           >
@@ -96,7 +97,7 @@ const TaskForm = ({ isOpen, onClose, addTask, tasks }) => {
               </button>
             </div>
           </form>
-        
+        </div>
 
         </>
       )}
