@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import TaskForm from "./TaskForm";
 import toast, { Toaster } from "react-hot-toast";
 
-const TaskCard = ({ task, index, deleteTask, updateTask }) => {
+const TaskCard = ({ task, index, deleteTask, updateTask, toggleCompletion }) => {
   const [read, setRead] = useState(task);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [openEditForm, setOpenEditForm] = useState(false);
@@ -13,19 +13,7 @@ const TaskCard = ({ task, index, deleteTask, updateTask }) => {
     setCompletedTasks(completed);
   }, []);
 
-  const toggleCompletion = (task) => {
-    const taskString = JSON.stringify(task);
-    let updated;
-    if (completedTasks.includes(taskString)) {
-      updated = completedTasks.filter((elem) => elem !== taskString);
-    } else {
-      updated = [...completedTasks, taskString];
-    }
 
-    // Update localStorage and state
-    localStorage.setItem("Completed", JSON.stringify(updated));
-    setCompletedTasks(updated);
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
