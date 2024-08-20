@@ -56,7 +56,7 @@ function App() {
     <>
       <div className="fixed top-0 right-0 left-0 grid grid-rows-10 max-w-screen w-screen max-w-full h-screen">
         <Header onAddTask={addTask} tasks={tasks} />
-        <TaskList tasks={tasks} onDelete={deleteTask} onUpdate={updateTask} Completed={toggleCompletion} />
+        <TaskList tasks={tasks} onDelete={deleteTask} onUpdate={updateTask} Completed={toggleCompletion} CTask={completedTasks} />
       </div>
     </>
   );

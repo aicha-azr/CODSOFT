@@ -2,17 +2,12 @@ import { useEffect, useState } from "react";
 import TaskForm from "./TaskForm";
 import toast, { Toaster } from "react-hot-toast";
 
-const TaskCard = ({ task, index, deleteTask, updateTask, toggleCompletion }) => {
+const TaskCard = ({ task, index, deleteTask, updateTask, toggleCompletion, completedTasks }) => {
   const [read, setRead] = useState(task);
-  const [completedTasks, setCompletedTasks] = useState([]);
   const [openEditForm, setOpenEditForm] = useState(false);
   const notify = () => toast.success("The task is updated successfully");
 
-  useEffect(() => {
-    const completed = JSON.parse(localStorage.getItem("Completed")) || [];
-    setCompletedTasks(completed);
-  }, []);
-
+ 
 
 
   const handleChange = (e) => {
