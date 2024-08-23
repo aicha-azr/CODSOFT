@@ -15,7 +15,7 @@ return(<>
      <NavBar/>    
     </div>
    
-   <div className="flex justify-center items-center w-full h-full ">
+   <div className="flex justify-center items-center w-full h-full " id="home">
    <div className="flex flex-col justify-around py-20 h-full text-start w-1/2 text-textPrimary gap-9">
    <div className="flex flex-col gap-4 p-3"> 
     <h1 className="font-bold ">Stay Ahead in Tech Innovation</h1>

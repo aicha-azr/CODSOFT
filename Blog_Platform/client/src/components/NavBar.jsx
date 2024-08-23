@@ -6,13 +6,13 @@ return(<>
             <img src={logo} alt="logo" width={40} height={40} className='rounded-full' />
         </div>
         <div className='flex gap-8 '>
-            <a href="/home" className='text-textPrimary'>Home</a>
-        <a href="/about" className='text-textPrimary'>About</a>
-        <a href="/contact" className='text-textPrimary'>Contact</a>
+            <a href="#home"  className='text-textPrimary'>Home</a>
+        <a href="#about" className='text-textPrimary'>About</a>
+        <a href="#contact" className='text-textPrimary'>Contact</a>
         </div>
         <div className='flex gap-1'>
             <button  className='focus:outline-none bg-accent text-white py-3 px-6 rounded-full hover:bg-[#059669]'>Sign up</button>
-            <button className=' focus:outline-none border border-primary text-primary py-3 px-6 rounded-full hover:bg-primary hover:text-white '>Sign in</button>
+            <button className='focus:outline-none border border-primary text-primary py-3 px-6 rounded-full hover:bg-primary hover:text-white'>Sign in</button>
         </div>
         
     </div>
