@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar";
 const LandingPage = ()=>{
 
 return(<>
-<div className="w-screen border border-black fixed top-0 right-0 left-0 px-2 overflow-y-auto scroll-smooth h-screen bg-radial-gradient bg-cover"  style={{
+<div className="w-screen fixed top-0 right-0 left-0 px-2 overflow-y-auto scroll-smooth h-screen bg-radial-gradient bg-cover"  style={{
     width: '100%',
     height: '100%',
     backgroundColor: '#F3F4F6',
