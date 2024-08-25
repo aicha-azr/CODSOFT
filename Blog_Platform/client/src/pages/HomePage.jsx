@@ -1,6 +1,7 @@
 import { CirclePlus, CircleUserRound, LogOut, Search, StickyNote } from "lucide-react";
 import SideBar from "../components/SideBar";
 import Card from "../components/Card";
+import CatCard from "../components/CatCard";
 const Home = () => {
   return (
     <>
@@ -22,24 +23,24 @@ const Home = () => {
           </div>
 
             <div className="row-span-1 row-start-3 lg:row-start-2 p-1 px-2 flex items-center overflow-x-auto gap-2">
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200 "></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
-                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <CatCard/>
+                    <CatCard/>
+                    <CatCard/>
+                    <CatCard/>
+                    <CatCard/>
+                    <CatCard/>
+                    <CatCard/>
+                    <CatCard/>
+                    <CatCard/>
+                    <CatCard/>
+                    <CatCard/>
+                    <CatCard/>
+                    <CatCard/>
+                    <CatCard/>
+                    <CatCard/>
+                    <CatCard/>
+                    <CatCard/>
+                    
             </div>
 
 
