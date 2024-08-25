@@ -19,7 +19,9 @@ export default {
       fontFamily: {
         sans: ['Inter', 'Arial', 'sans-serif'],
       },
-      
+      boxShadow: {
+        light: '0 2px 4px rgba(0, 0, 0, 0.1)',
+      },
     },
   },
   plugins: [],

@@ -1,5 +1,6 @@
 import { CirclePlus, CircleUserRound, LogOut, Search, StickyNote } from "lucide-react";
 import SideBar from "../components/SideBar";
+import Card from "../components/Card";
 const Home = () => {
   return (
     <>
@@ -20,66 +21,35 @@ const Home = () => {
             </div>
           </div>
 
-            <div className="row-span-1 row-start-3 lg:row-start-2 p-1 px-2 flex overflow-x-auto gap-2">
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary "></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
-                    <div className="border border-black  rounded-md h-10 min-w-20 bg-secondary"></div>
+            <div className="row-span-1 row-start-3 lg:row-start-2 p-1 px-2 flex items-center overflow-x-auto gap-2">
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200 "></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
+                    <div className="  rounded-md h-10 min-w-20 bg-gray-200"></div>
             </div>
 
 
 
-          <div className="row-span-8 row-start-4 lg:row-start-3 border border-black  flex flex-col gap-2  p-1 overflow-y-auto scroll-smooth ">
+          <div className="row-span-8 row-start-4 lg:row-start-3 flex flex-col gap-2  p-1 overflow-y-auto scroll-smooth ">
 
-            <div className="border border-black flex flex-col h-fit p-2 rounded-md shadow-md">
-              <div className="flex gap-2">
-                <div className="h-10 w-10 rounded-full bg-black animate-pulse"></div>
-                <div className="h-5 w-1/5 rounded-full bg-black self-center animate-pulse"></div>
-              </div>
-              <div className=" w-full px-5 flex flex-col gap-1.5  text-start">
-                <div className="h-10 w-full bg-black rounded-full animate-pulse"></div>
-                <div className="h-[9rem] w-full bg-black rounded-xl animate-pulse"></div>
-              </div>
-              <div></div>
-            </div>
+           <Card/>
+           <Card/>
+           <Card/>
 
-            <div className="border border-black flex flex-col h-fit p-2 rounded-md shadow-md">
-              <div className="flex gap-2">
-                <div className="h-10 w-10 rounded-full bg-black animate-pulse"></div>
-                <div className="h-5 w-1/5 rounded-full bg-black self-center animate-pulse"></div>
-              </div>
-              <div className=" w-full px-5 flex flex-col gap-1.5  text-start">
-                <div className="h-10 w-full bg-black rounded-full animate-pulse"></div>
-                <div className="h-[9rem] w-full bg-black rounded-xl animate-pulse"></div>
-              </div>
-              <div></div>
-            </div>
-
-            <div className="border border-black flex flex-col h-fit p-2 rounded-md shadow-md">
-              <div className="flex gap-2">
-                <div className="h-10 w-10 rounded-full bg-black animate-pulse"></div>
-                <div className="h-5 w-1/5 rounded-full bg-black self-center animate-pulse"></div>
-              </div>
-              <div className=" w-full px-5 flex flex-col gap-1.5  text-start">
-                <div className="h-10 w-full bg-black rounded-full animate-pulse"></div>
-                <div className="h-[9rem] w-full bg-black rounded-xl animate-pulse"></div>
-              </div>
-              <div></div>
-            </div>
 
 
           </div>
