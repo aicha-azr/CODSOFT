@@ -6,7 +6,7 @@ const SideBar = () => {
 
     return (
         <div className="fixed lg:h-screen h-fit right-0 left-0 lg:relative lg:grid lg:col-span-2 col-span-1 bg-white grid-rows-10 gap-8 shadow-r rounded-r-lg shadow-md row-start-0 row-span-1 col-span-10 z-30">
-            <div className="font-bold lg:text-2xl text-xl row-span-2 border-b text-start self-center lg:pb-5 flex items-center justify-between lg:justify-center p-2 py-6 z-20">
+            <div className="font-bold lg:text-2xl text-xl row-span-2 border-b text-start self-center lg:pb-5 flex items-center justify-between lg:justify-center p-2 py-4 z-20">
                 <h2 className="text-lg lg:text-2xl lg:text-center">TechBlog</h2>
                 <ChevronDown 
                     className="lg:hidden  cursor-pointer z-20" 
