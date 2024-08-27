@@ -11,7 +11,6 @@ mongoose.connect(URL, {
   .then(() => console.log('Successfully connected to the database'))
   .catch((e) => console.error('Error connecting to the database', e));
 
-// Get the connection instance
-const db = mongoose.connection;
 
-module.exports = db;
+
+module.exports = mongoose;
