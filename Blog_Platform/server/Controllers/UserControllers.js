@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('../Models/UserSchema');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 const Controllers = {
     Signup: async (req, res) => {
         try {
@@ -55,7 +56,7 @@ const Controllers = {
             // Generate JWT
             const token = jwt.sign(
                 { userId: user._id, email: user.email }, // payload
-                'your_jwt_secret_key', // secret key (you should store this securely)
+                process.env.SECRET_KEY, // secret key 
                 { expiresIn: '1h' } // token expiration time
             );
 

@@ -11,8 +11,11 @@ app.use(express.json());
 const router = require('./Routes/routers');
 app.use(router);
 
+const authenticateJWT = require('./Middleware/VerifyToken');
+const crypto = require('crypto');
 // Point de vérification de l'API
-app.get('/', (req, res) => {
+app.get('/', authenticateJWT, (req, res) => {
+
     res.json('Hello world');
 });
 
