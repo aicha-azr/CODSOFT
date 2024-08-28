@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
-
+const cors = require('cors');
 // Charger la connexion à la base de données
 require('./Connection/connection');
 
 // Middleware pour parser les requêtes JSON
 app.use(express.json());
-
+app.use(cors());
 // Utilisation des routes
 const router = require('./Routes/routers');
 app.use(router);

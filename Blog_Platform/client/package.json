@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.7.5",
+    "cors": "^2.8.5",
     "lucide": "^0.433.0",
     "lucide-react": "^0.435.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.1",
+    "react-toastify": "^10.0.5",
     "shadergradient": "^1.2.14"
   },
   "devDependencies": {
