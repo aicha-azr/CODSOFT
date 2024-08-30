@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Post = require('../Models/PostSchema');
 
-const Controllers = {
+const PostControllers = {
     getAllPost: async (req, res) => {
         try {
             const posts = await Post.find();
@@ -97,4 +97,4 @@ const Controllers = {
     
 };
 
-module.exports = Controllers; 
+module.exports = PostControllers; 

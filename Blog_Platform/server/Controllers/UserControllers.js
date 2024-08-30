@@ -69,6 +69,18 @@ const Controllers = {
             console.error('Error during login:', error);
             return res.status(500).json({ message: 'An error occurred during login', error: error.message });
         }
+    },
+    getUser: async(req, res)=>{
+        try{
+            const id= req.user._id;
+            const user = await User.findById(id);
+            if(!user){
+                return res.status(404).json({message: 'user not found'})
+            }
+            return res.status(200).json({user: user})
+        }catch(e){
+            return res.status(500).json({error: e.message});
+        }
     }
 
     

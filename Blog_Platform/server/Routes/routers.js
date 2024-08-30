@@ -1,6 +1,14 @@
 const { Router } = require("express");
 const router = Router();
 const Controllers = require('../Controllers/UserControllers');
+const authenticateJWT = require("../Middleware/VerifyToken");
+const PostControllers = require("../Controllers/PostControllers");
 router.post('/api/signup',Controllers.Signup);
 router.post('/api/login',Controllers.Login);
+router.get('/api/user',authenticateJWT ,Controllers.getUser);
+router.get('/api/posts', authenticateJWT, PostControllers.getAllPost);
+router.get('/api/posts/:id', authenticateJWT, PostControllers.getOnePost);
+router.post('/api/posts', authenticateJWT, PostControllers.addPost);
+router.put('/api/posts/:id', authenticateJWT, PostControllers.updatePost);
+router.delete('/api/posts/:id', authenticateJWT, PostControllers.deletePost);
 module.exports= router;
