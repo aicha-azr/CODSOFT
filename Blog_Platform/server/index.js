@@ -1,25 +1,37 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-// Charger la connexion à la base de données
+const cookieParser = require('cookie-parser');
+
+
 require('./Connection/connection');
 
-// Middleware pour parser les requêtes JSON
+
 app.use(express.json());
-app.use(cors());
-// Utilisation des routes
+app.use(cookieParser());
+
+// Configure CORS to allow credentials
+app.use(
+    cors({
+      origin: ["http://localhost:5173"],
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      credentials: true, // Allows cookies to be sent and received
+    })
+);
+
+
+const authenticateJWT = require('./Middleware/VerifyToken');
+
+
 const router = require('./Routes/routers');
 app.use(router);
 
-const authenticateJWT = require('./Middleware/VerifyToken');
-const crypto = require('crypto');
-// Point de vérification de l'API
-app.get('/', authenticateJWT, (req, res) => {
 
+app.get('/', authenticateJWT, (req, res) => {
     res.json('Hello world');
 });
 
-// Démarrage du serveur
+// Start the server
 app.listen(8080, () => {
     console.log('Server is running on port 8080');
 });

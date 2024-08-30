@@ -59,7 +59,10 @@ const Controllers = {
                 process.env.SECRET_KEY, // secret key 
                 { expiresIn: '1h' } // token expiration time
             );
-
+            res.cookie("token", token, {
+                withCredentials: true,
+                httpOnly: false,
+              });
             // Respond with the token
             return res.status(200).json({ message: 'Login successful', token });
         } catch (error) {

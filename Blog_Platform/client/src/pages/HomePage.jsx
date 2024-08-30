@@ -7,7 +7,28 @@ import { ShaderGradientCanvas, ShaderGradient } from 'shadergradient'
 import * as reactSpring from '@react-spring/three'
 import * as drei from '@react-three/drei'
 import * as fiber from '@react-three/fiber'
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
+import axios from 'axios';
+
 const Home = () => {
+  const [cookies, removeCookie] = useCookies(['token']);
+  const verifyCookie = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/', {
+        withCredentials: true, 
+      });
+      console.log('Response:', response.data);
+    } catch (error) {
+      console.error('Error verifying cookie:', error);
+    }
+  };
+  
+ 
+  useEffect(() => {
+ // console.log(cookies.token);
+    verifyCookie();
+}, []);
   return (
     <>
       <div

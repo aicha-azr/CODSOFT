@@ -18,7 +18,8 @@ const LoginPage = ()=>{
     const userLogin = async(e)=>{
       e.preventDefault();
       try{
-        const response = await axios.post('http://localhost:8080/api/login', userData);
+        const response = await axios.post('http://localhost:8080/api/login', userData,
+          { withCredentials: true });
         console.log(response.data);
         setMessage(response.data.message);
         notifySuccess(response.data.message);
