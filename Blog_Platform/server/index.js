@@ -28,7 +28,7 @@ app.use(router);
 
 
 app.get('/', authenticateJWT, (req, res) => {
-    res.json('Hello world');
+    res.json({message:'Hello world', user: req.user});
 });
 
 // Start the server

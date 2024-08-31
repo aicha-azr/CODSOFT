@@ -7,13 +7,9 @@ const postSchema = new mongoose.Schema({
         required: true
     },
     content: {
-        type: String,
+        type: Object,
         unique: true,
         required: true
-    },
-    image: {
-        type: [String],
-        required: false
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,

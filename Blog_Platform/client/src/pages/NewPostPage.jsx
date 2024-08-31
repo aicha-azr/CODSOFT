@@ -110,7 +110,7 @@ useEffect(() => {
       content: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
       title: title,
     };
-
+console.log(JSON.stringify(convertToRaw(editorState.getCurrentContent())))
     try {
       await axios.post('http://localhost:8080/api/posts', postData, {
         withCredentials: true, 

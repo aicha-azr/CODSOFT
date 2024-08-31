@@ -39,7 +39,7 @@ const PostControllers = {
                 image: images,  
                 title: title,
                 content: content,
-                author: req.user._id 
+                author: req.user.userId 
             });
     
             // If the post was successfully created
@@ -83,7 +83,7 @@ const PostControllers = {
                     image: images,  
                     title: title,
                     content: content,
-                    author: req.user._id 
+                    author: req.user.userId 
                 }
             );
             if(!updatedPost){

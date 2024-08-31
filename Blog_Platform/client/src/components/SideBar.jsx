@@ -24,13 +24,13 @@ const SideBar = ({page}) => {
             <ol 
                 className={`transition-transform duration-300 ease-in-out ${menu ? "transform translate-y-0" : "transform -translate-y-full hidden "} h-fit text-start flex lg:row-start-3 lg:translate-y-0 lg:flex flex-col gap-2 px-3 text-textPrimary py-5 z-0`}
             >
-                <li className={`shadow-md p-2 flex items-center gap-2.5 rounded-2xl ${isCurrentPage('profile') ? 'bg-gray-200' : 'bg-altBackground'} font-medium cursor-pointer hover:bg-gray-200 hover:shadow-md`}>
+                <li className={`shadow-md p-2 flex items-center gap-2.5 rounded-2xl ${isCurrentPage('profile') ? 'bg-gray-200' : 'bg-altBackground'} font-medium cursor-pointer hover:bg-gray-200 hover:shadow-md`} onClick={() => handleNavigation('/profile')}>
                     <CircleUserRound size={30}/> Profile
                 </li>
                 <li className={`shadow-md p-2 flex items-center gap-2.5 rounded-2xl ${isCurrentPage('addPost') ? 'bg-gray-200' : 'bg-altBackground'} font-medium cursor-pointer hover:bg-gray-200 hover:shadow-md`}  onClick={() => handleNavigation('/newPost')}>
                     <CirclePlus size={30}/> Add post
                 </li>
-                <li className={`shadow-md p-2 flex items-center gap-2.5 rounded-2xl ${isCurrentPage('myPosts') ? 'bg-gray-200' : 'bg-altBackground'} font-medium cursor-pointer hover:bg-gray-200 hover:shadow-md`}>
+                <li className={`shadow-md p-2 flex items-center gap-2.5 rounded-2xl ${isCurrentPage('myPosts') ? 'bg-gray-200' : 'bg-altBackground'} font-medium cursor-pointer hover:bg-gray-200 hover:shadow-md`} onClick={() => handleNavigation('/myPosts')}>
                     <StickyNote size={30}/> My posts
                 </li>
                 <li className="shadow-md p-2 flex items-center gap-2.5 rounded-2xl bg-altBackground font-medium cursor-pointer hover:bg-gray-200 hover:shadow-md">

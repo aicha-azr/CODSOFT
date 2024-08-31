@@ -6,6 +6,8 @@ import LoginPage from './pages/LoginPage';
 import Home from './pages/HomePage';
 import NewPostPage from './pages/NewPostPage';
 import 'global';
+import MyPostsPage from './pages/MyPostsPage';
+import ProfilePage from './pages/ProfilePage';
 function App() {
   if (typeof global === 'undefined') {
     window.global = window;
@@ -18,6 +20,8 @@ function App() {
         <Route path='/signin' element={<LoginPage/>} />
         <Route path='/home' element={<Home/>} />
         <Route path='/newPost' element={<NewPostPage/>} />
+        <Route path='/myPosts' element={<MyPostsPage/>} />
+        <Route path='/profile' element={<ProfilePage/>} />
       </Routes>
     </Router>
   );
