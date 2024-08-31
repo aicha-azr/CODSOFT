@@ -57,7 +57,7 @@ const Controllers = {
             const token = jwt.sign(
                 { userId: user._id, email: user.email }, // payload
                 process.env.SECRET_KEY, // secret key 
-                { expiresIn: '1h' } // token expiration time
+                { expiresIn: '1d' } // token expiration time
             );
             res.cookie("token", token, {
                 withCredentials: true,

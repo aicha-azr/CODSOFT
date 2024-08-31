@@ -10,17 +10,24 @@ import * as fiber from '@react-three/fiber'
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const [cookies, removeCookie] = useCookies(['token']);
+    const nav = useNavigate();
+    const [cookies, removeCookie] = useCookies(['token']);
   const verifyCookie = async () => {
     try {
+      if(!cookies.token){
+        nav('/signin')
+      }
       const response = await axios.get('http://localhost:8080/', {
         withCredentials: true, 
       });
       console.log('Response:', response.data);
     } catch (error) {
       console.error('Error verifying cookie:', error);
+      nav('/signin')
+    
     }
   };
   
