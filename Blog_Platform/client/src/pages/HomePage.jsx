@@ -106,7 +106,7 @@ setPosts(response.data.posts);
                     <div className="rounded-full self-center flex items-center">{item.author.name}</div>
                   </div>
                   <div className="w-full px-5 flex flex-col md:flex-row items-center gap-1.5 text-start">
-                    <div className="h-10 w-full  rounded-full flex items-center"><h2 className="font-bold text-lg">{item.title}</h2></div>
+                    <div className="h-fit w-full  rounded-full flex items-center"><h2 className="font-bold text-lg">{item.title}</h2></div>
                     <div className={`h-[12rem] w-full rounded-xl flex items-center justify-center ${firstImage ? '' : 'hidden'}`}>
                       {firstImage?(<img src={firstImage} alt={item.title} className="h-full w-full object-full " />):""}
                     </div>

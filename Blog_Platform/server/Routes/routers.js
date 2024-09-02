@@ -11,4 +11,5 @@ router.get('/api/posts/:id', authenticateJWT, PostControllers.getOnePost);
 router.post('/api/posts', authenticateJWT, PostControllers.addPost);
 router.put('/api/posts/:id', authenticateJWT, PostControllers.updatePost);
 router.delete('/api/posts/:id', authenticateJWT, PostControllers.deletePost);
+router.get('/api/myposts', authenticateJWT, PostControllers.getUserPosts);
 module.exports= router;

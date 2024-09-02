@@ -96,6 +96,18 @@ const PostControllers = {
         }catch(e){
             return res.status(500).json({error: e.message})
         }
+    },
+    getUserPosts:  async (req, res) => {
+        try {
+            const userId = req.user.userId;
+            const posts = await Post.find({ author: userId }); 
+            if (!posts || posts.length === 0) {
+                return res.status(404).json({ message: 'No posts found for this user' });
+            }
+            res.status(200).json({ posts });
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
     }
     
 };

@@ -4,17 +4,16 @@ import { Editor, EditorState, RichUtils, AtomicBlockUtils, convertToRaw, convert
 import 'draft-js/dist/Draft.css';
 import Toolbar from "../components/ToolBar";
 import axios from "axios";
-import { ArrowLeft, CircleUser } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import Card from "../components/Card";
 
 const MyPostsPage = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [title, setTitle] = useState(null);
   const nav = useNavigate();
   const [cookies] = useCookies(['token']);
-  const [posts, setPosts] = useState([]);
+  
   const verifyCookie = () => {
     if (!cookies.token) {
       nav('/signin');
@@ -54,12 +53,27 @@ const MyPostsPage = () => {
       const response = await axios.get('http://localhost:8080/api/myposts', {
         withCredentials: true,
       });
-      console.log(response.data)
-      setPosts(response.data.posts);
-      } catch (e) {
-        console.error("Error parsing JSON:", e);
+      console.log(response)
+      if (!response.data.post || !response.data.post.content) {
+        console.warn("Post content is missing or empty");
+        return; // Or handle this case as needed
       }
   
+      const rawContent = response.data.post.content;
+      let parsedContent;
+  
+      try {
+        parsedContent = JSON.parse(rawContent);
+      } catch (e) {
+        console.error("Error parsing JSON:", e);
+        return; // Handle JSON parsing errors
+      }
+  
+      const contentState = convertFromRaw(parsedContent);
+      setEditorState(EditorState.createWithContent(contentState));
+    } catch (error) {
+      console.error("Error fetching post content:", error);
+    }
   };
   
   
@@ -68,25 +82,7 @@ const MyPostsPage = () => {
     verifyCookie();
     fetchPostContent();
   }, [cookies.token, nav]); // Add dependencies to re-run effect on token change
-// Function to extract the first image URL from the content JSON
-const extractFirstImage = (content) => {
-  try {
-    const parsedContent = JSON.parse(content);
-    const blocks = parsedContent.blocks || [];
-    for (const block of blocks) {
-      if (block.type === 'atomic') {
-        const entityKey = block.entityRanges?.[0]?.key;
-        const entity = parsedContent.entityMap[entityKey];
-        if (entity?.type === 'IMAGE') {
-          return entity.data.src;
-        }
-      }
-    }
-  } catch (error) {
-    console.error('Error parsing content:', error);
-  }
-  return null;
-};
+
   return (
     <>
       <div className="w-screen fixed top-0 right-0 left-0 overflow-y-auto scroll-smooth h-screen max-h-fit border border-blue-300 bg-altBackground flex flex-col font-sans grid grid-cols-10 gap-2 grid-rows-10">
@@ -98,30 +94,23 @@ const extractFirstImage = (content) => {
             </div>
             <h2 className="text-center lg:text-2xl font-extrabold">My Posts</h2>
           </div>
-          <div className="row-span-9 row-start-3 lg:row-start-2 flex flex-col gap-2 p-1 overflow-y-auto scroll-smooth z-10">
-          {posts.length > 0 ? posts.map((item, index) => {
-              const firstImage = extractFirstImage(item.content); // Extract the first image
-              return (
-                <div className="bg-white bg-gradient-to-r from-white to-gray-100 flex flex-col h-fit p-4 rounded-xl shadow-light shadow-lg gap-2 backdrop-grayscale-0" key={index}>
-                  <div className="flex gap-2">
-                    <div className="rounded-full bg-gray-200 flex items-center"><CircleUser size={20} /></div>
-                    <div className="rounded-full self-center flex items-center">{item.author.name}</div>
-                  </div>
-                  <div className="w-full px-5 flex flex-col md:flex-row items-center gap-3 lg:gap-1.5 text-start">
-                    <div className="h-fit w-full  rounded-full flex items-center"><h2 className="font-bold text-lg">{item.title}</h2></div>
-                    <div className={`h-[12rem] w-full rounded-xl flex items-center justify-center ${firstImage ? '' : 'hidden'}`}>
-                      {firstImage?(<img src={firstImage} alt={item.title} className="h-full w-full object-full " />):""}
-                    </div>
-                  </div>
-                </div>
-              );
-            }) : (
-              <>
-                <Card />
-                <Card />
-                <Card />
-              </>
-            )}
+          <div className="row-span-1 row-start-3 lg:row-start-2 p-1 px-2 flex items-center gap-2 bg-shader-gradient z-10 border-b">
+            {/* Add any additional content or functionality here */}
+          </div>
+
+          <div className="row-span-1 row-start-3 lg:row-start-3 p-1 px-2 flex items-center gap-2 bg-shader-gradient z-20">
+            {/* Add any additional content or functionality here */}
+          </div>
+          <div className="row-span-8 row-start-4 lg:row-start-4 flex flex-col gap-2 p-1 overflow-y-auto scroll-smooth z-10">
+            <Editor
+              editorState={editorState}
+              onChange={setEditorState}
+              handleKeyCommand={handleKeyCommand}
+              blockRendererFn={blockRendererFn}
+              blockStyleFn={blockStyleFn}
+              placeholder="Write something..."
+              readOnly={true} // Make the editor read-only
+            />
           </div>
         </div>
       </div>
