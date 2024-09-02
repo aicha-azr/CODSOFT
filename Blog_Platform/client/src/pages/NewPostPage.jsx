@@ -127,21 +127,22 @@ console.log(JSON.stringify(convertToRaw(editorState.getCurrentContent())))
     <>
       <div className="w-screen fixed top-0 right-0 left-0 overflow-y-auto scroll-smooth h-screen max-h-fit border border-blue-300 bg-altBackground flex flex-col font-sans grid grid-cols-10 gap-2 grid-rows-10">
         <SideBar page="addPost" />
-        <div className="h-screen max-h-fit lg:col-span-8 col-span-10 grid grid-rows-10 col-start-1 z-10">
-          <div className="row-span-1 row-start-2 py-5 lg:row-start-1 flex justify-center items-center bg-shader-gradient relative border-b">
-          <div className="absolute left-1 font-bold bg-white rounded-full p-1 shadow-light shadow-md text-textPrimary" onClick={()=> nav('/home')}><ArrowLeft  /></div>
-          
-            <h2 className="text-center lg:text-2xl font-extrabold">Add new Post</h2>
+        <div className="h-screen max-h-fit lg:col-span-8 col-span-10 grid grid-rows-10 col-start-1 z-10 relative">
+        <div className="row-span-1 row-start-2 py-5 lg:row-start-1 flex justify-center items-center bg-shader-gradient relative border-b">
+            <div className="absolute left-1 font-bold bg-white rounded-full p-1 shadow-light shadow-md text-textPrimary" onClick={() => nav('/home')}>
+              <ArrowLeft />
+            </div>
+            <h2 className="text-center lg:text-2xl font-extrabold">Add new post</h2>
           </div>
           <div className="row-span-1 row-start-3 lg:row-start-2 p-1 px-2 flex  items-center gap-2 bg-shader-gradient z-10 border-b">
             <label htmlFor="title" className="font-bold">Title:</label>
             <input type="text" name="title" placeholder="write a title for your post..." className="bg-transparent p-2 focus:outline-none w-full" onChange={(e)=>setTitle(e.target.value)}/>
           </div>
 
-          <div className="row-span-1 row-start-3 lg:row-start-3 p-1 px-2 flex items-center gap-2 bg-shader-gradient z-20">
+          <div className="row-span-1 row-start-4 lg:row-start-3 p-1 px-2 flex items-center gap-2 bg-shader-gradient z-20">
             <Toolbar editorState={editorState} setEditorState={setEditorState} addImage={handleImageUpload} />
           </div>
-          <div className="row-span-8 row-start-4 lg:row-start-4 flex flex-col gap-2 p-1 overflow-y-auto scroll-smooth z-10">
+          <div className="lg:row-span-6 row-span-5 row-start-5 lg:row-start-4 flex flex-col gap-2 p-1 overflow-y-auto scroll-smooth z-10">
             <Editor
               editorState={editorState}
               onChange={setEditorState}
@@ -152,8 +153,8 @@ console.log(JSON.stringify(convertToRaw(editorState.getCurrentContent())))
             />
 
           </div>
+          <button onClick={handleSubmit} className="absolute right-0 bottom-0 w-full p-2 mb-1 mx-1 bg-blue-500 text-white rounded z-20">Submit Post</button>
 
-          <button onClick={handleSubmit} className="p-2 m-4 bg-blue-500 text-white rounded">Submit Post</button>
         </div>
       </div>
     <ToastContainer position="top-center" transition={Bounce}/>
