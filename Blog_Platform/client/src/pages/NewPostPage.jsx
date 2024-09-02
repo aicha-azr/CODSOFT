@@ -7,7 +7,8 @@ import axios from "axios";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const NewPostPage = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [title, setTitle] = useState(null);
@@ -19,7 +20,7 @@ const verifyCookie = () => {
       nav('/signin')
     }
 };
-
+const notifySuccess = (message) => toast.success(message)
 
 useEffect(() => {
 // console.log(cookies.token);
@@ -116,6 +117,7 @@ console.log(JSON.stringify(convertToRaw(editorState.getCurrentContent())))
         withCredentials: true, 
       });
       alert('Post submitted successfully');
+      notifySuccess('Post submitted successfully');
     } catch (error) {
       console.error("Error submitting post", error);
     }
@@ -154,7 +156,7 @@ console.log(JSON.stringify(convertToRaw(editorState.getCurrentContent())))
           <button onClick={handleSubmit} className="p-2 m-4 bg-blue-500 text-white rounded">Submit Post</button>
         </div>
       </div>
-    
+    <ToastContainer position="top-center" transition={Bounce}/>
     </>
   );
 };

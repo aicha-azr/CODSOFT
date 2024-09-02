@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 const Post = require('../Models/PostSchema');
+const User = require('../Models/UserSchema');
 
 const PostControllers = {
     getAllPost: async (req, res) => {
         try {
-            const posts = await Post.find();
+            const posts = await Post.find().populate('author', 'name');
             if (!posts || posts.length === 0) { 
                 return res.status(400).json({ message: 'No post found' });
             }
@@ -20,7 +21,9 @@ const PostControllers = {
             if (!post) {
                 return res.status(404).json({ message: 'Post not found' });
             }
-            res.status(200).json({ post: post });
+            const user = await User.findById(post.author._id);
+
+            res.status(200).json({ post: post, user: user });
         } catch (error) {
             res.status(500).json({ error: error.message });
         }

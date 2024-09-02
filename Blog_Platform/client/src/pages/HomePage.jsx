@@ -1,4 +1,4 @@
-import { CirclePlus, CircleUserRound, LogOut, Search, StickyNote, X } from "lucide-react";
+import { CirclePlus, CircleUser, CircleUserRound, LogOut, Search, StickyNote, X } from "lucide-react";
 import SideBar from "../components/SideBar";
 import Card from "../components/Card";
 import CatCard from "../components/CatCard";
@@ -8,13 +8,24 @@ import * as reactSpring from '@react-spring/three'
 import * as drei from '@react-three/drei'
 import * as fiber from '@react-three/fiber'
 import { useCookies } from "react-cookie";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-
 const Home = () => {
-    const nav = useNavigate();
-    const [cookies, removeCookie] = useCookies(['token']);
+  const nav = useNavigate();
+  const [cookies, removeCookie] = useCookies(['token']);
+  const [posts, setPosts] = useState([]);
+  const getAllPosts = async()=>{
+    try{
+const response= await axios.get('http://localhost:8080/api/posts',{
+  withCredentials: true,
+})
+console.log(response.data.posts)
+setPosts(response.data.posts);
+    }catch(e){
+      console.log('error:', e)
+    }
+  }
   const verifyCookie = async () => {
     try {
       if(!cookies.token){
@@ -35,7 +46,27 @@ const Home = () => {
   useEffect(() => {
  // console.log(cookies.token);
     verifyCookie();
+    getAllPosts();
 }, []);
+  // Function to extract the first image URL from the content JSON
+  const extractFirstImage = (content) => {
+    try {
+      const parsedContent = JSON.parse(content);
+      const blocks = parsedContent.blocks || [];
+      for (const block of blocks) {
+        if (block.type === 'atomic') {
+          const entityKey = block.entityRanges?.[0]?.key;
+          const entity = parsedContent.entityMap[entityKey];
+          if (entity?.type === 'IMAGE') {
+            return entity.data.src;
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error parsing content:', error);
+    }
+    return null;
+  };
   return (
     <>
       <div
@@ -49,26 +80,7 @@ const Home = () => {
            
           </div>
 
-            <div className="row-span-1 row-start-3 lg:row-start-2 p-1 px-2 flex items-center overflow-x-auto gap-2 bg-shader-gradient z-10">
-                    <CatCard/>
-                    <CatCard/>
-                    <CatCard/>
-                    <CatCard/>
-                    <CatCard/>
-                    <CatCard/>
-                    <CatCard/>
-                    <CatCard/>
-                    <CatCard/>
-                    <CatCard/>
-                    <CatCard/>
-                    <CatCard/>
-                    <CatCard/>
-                    <CatCard/>
-                    <CatCard/>
-                    <CatCard/>
-                    <CatCard/>
-                    
-            </div>
+           
 
             <ShaderGradientCanvas
      importedFiber={{ ...fiber, ...drei, ...reactSpring }}
@@ -84,11 +96,31 @@ const Home = () => {
      />
    </ShaderGradientCanvas>
 
-          <div className="row-span-8 row-start-4 lg:row-start-3  flex flex-col gap-2  p-1 overflow-y-auto scroll-smooth z-10 ">
-
-           <Card/>
-           <Card/>
-           <Card/>
+          <div className="row-span-9 row-start-3 lg:row-start-2  flex flex-col gap-2  p-1 overflow-y-auto scroll-smooth z-10 ">
+          {posts.length > 0 ? posts.map((item, index) => {
+              const firstImage = extractFirstImage(item.content); // Extract the first image
+              return (
+                <div className="bg-white bg-gradient-to-r from-white to-gray-100 flex flex-col h-fit p-4 rounded-xl shadow-light shadow-lg gap-2 backdrop-grayscale-0" key={index}>
+                  <div className="flex gap-2">
+                    <div className="rounded-full bg-gray-200 flex items-center"><CircleUser size={20} /></div>
+                    <div className="rounded-full self-center flex items-center">{item.author.name}</div>
+                  </div>
+                  <div className="w-full px-5 flex flex-col md:flex-row items-center gap-1.5 text-start">
+                    <div className="h-10 w-full  rounded-full flex items-center"><h2 className="font-bold text-lg">{item.title}</h2></div>
+                    <div className={`h-[12rem] w-full rounded-xl flex items-center justify-center ${firstImage ? '' : 'hidden'}`}>
+                      {firstImage?(<img src={firstImage} alt={item.title} className="h-full w-full object-full " />):""}
+                    </div>
+                  </div>
+                </div>
+              );
+            }) : (
+              <>
+                <Card />
+                <Card />
+                <Card />
+              </>
+            )}
+          
 
 
 
