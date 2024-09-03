@@ -8,14 +8,27 @@ import { ArrowLeft, CircleUser, EllipsisVertical } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Card from "../components/Card";
-
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const MyPostsPage = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [title, setTitle] = useState(null);
   const nav = useNavigate();
   const [cookies] = useCookies(['token']);
   const [posts, setPosts] = useState([]);
-  const [openMenu, setOpenMenu] = useState(null)
+  const [openMenu, setOpenMenu] = useState(false);
+  const [activeMenuId, setActiveMenuId] = useState(null);
+  const [deleteMenu, setDeleteMenu] = useState(false);
+ 
+const toggleMenu = (postId) => {
+  if (openMenu && activeMenuId === postId) {
+    setOpenMenu(false); 
+    setActiveMenuId(null);
+  } else {
+    setOpenMenu(true); 
+    setActiveMenuId(postId);
+  }
+};
   const verifyCookie = () => {
     if (!cookies.token) {
       nav('/signin');
@@ -88,6 +101,18 @@ const extractFirstImage = (content) => {
   }
   return null;
 };
+const deletePost = async()=>{
+  try{
+    const response = await axios.delete(`http://localhost:8080/api/posts/${activeMenuId}`,{
+      withCredentials: true,
+    })
+    console.log(response.data);
+    setPosts((prevPosts) => prevPosts.filter((post) => post._id !== activeMenuId));
+    
+  }catch(e){
+    console.log('erroe:',e)
+  }
+}
   return (
     <>
       <div className="w-screen fixed top-0 right-0 left-0 overflow-y-auto scroll-smooth h-screen max-h-fit border border-blue-300 bg-altBackground flex flex-col font-sans grid grid-cols-10 gap-2 grid-rows-10">
@@ -103,20 +128,30 @@ const extractFirstImage = (content) => {
           {posts.length > 0 ? posts.map((item, index) => {
               const firstImage = extractFirstImage(item.content); // Extract the first image
               return (
-                <div className="bg-white bg-gradient-to-r from-white to-gray-100 flex flex-col h-fit p-4 rounded-xl shadow-light shadow-lg gap-2 backdrop-grayscale-0 relative" key={item._id} onClick={()=>nav(`/posts/${item._id}`)}>
-                  <div className="flex gap-2">
+                <div className="bg-white bg-gradient-to-r from-white to-gray-100 flex flex-col h-fit p-4 rounded-xl shadow-light shadow-lg gap-2 backdrop-grayscale-0 relative" key={item._id} >
+                  <div className="flex gap-2 border-b">
                     <div className="rounded-full bg-gray-200 flex items-center"><CircleUser size={20} /></div>
-                    <div className="rounded-full self-center flex items-center">{item.author.name}</div>
+                    <div className="rounded-full self-center flex items-center" >You</div>
                   </div>
-                  <div className="w-full px-5 flex flex-col md:flex-row items-center gap-3 lg:gap-1.5 text-start">
+                  <div className="w-full px-5 flex flex-col md:flex-row items-center gap-3 lg:gap-1.5 text-start" onClick={()=>nav(`/posts/${item._id}`)}>
                     <div className="h-fit w-full  rounded-full flex items-center"><h2 className="font-bold text-lg">{item.title}</h2></div>
                     <div className={`h-[12rem] w-full rounded-xl flex items-center justify-center ${firstImage ? '' : 'hidden'}`}>
                       {firstImage?(<img src={firstImage} alt={item.title} className="h-full w-full object-full " />):""}
                     </div>
                   </div>
-                  <div className="absolute top-2 right-3  bg-gray-200 rounded-full p-1">
+                  <div className="absolute top-2 right-3  bg-gray-200 rounded-full p-1" id={item._id} onClick={() => toggleMenu(item._id)}>
                   <EllipsisVertical />
                   </div>
+                  {openMenu && activeMenuId === item._id && (
+        <div className="flex flex-col gap-1 rounded py-1 bg-gray-200 text-textSecondary absolute right-1 top-11">
+          <button className="focus:outline-none border-none p-1 bg-transparent hover:bg-yellow-200 px-3 font-bold">
+            Update
+          </button>
+          <button className="focus:outline-none border-none p-1 bg-transparent hover:bg-red-200 px-3 font-bold" onClick={()=>setDeleteMenu(!deleteMenu)}>
+            Delete
+          </button>
+        </div>
+      )}
                 </div>
               );
             }) : (
@@ -127,8 +162,24 @@ const extractFirstImage = (content) => {
               </>
             )}
           </div>
+          {
+        deleteMenu && (<>
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+       <div className="bg-white shadow-md p-4 rounded-lg lg:absolute lg:right-66">
+            <h2>Do you really want to delete this post</h2>
+            <div className="flex gap-3 items-center justify-center">
+              <button className="focus:outline-none  rounded-md p-1 px-4 hover:bg-red-200" onClick={()=>{deletePost();
+                setDeleteMenu(false);
+              }}>yes</button>
+              <button className="focus:outline-none rounded-md p-1 px-4 hover:bg-gray-200" onClick={()=>setDeleteMenu(false)}>no</button>
+            </div>
+       </div></div>
+        </>)
+      }
         </div>
       </div>
+      <ToastContainer position="top-center" transition={Bounce}/>
+    
     </>
   );
 };
