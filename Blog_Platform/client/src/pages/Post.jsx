@@ -5,15 +5,16 @@ import 'draft-js/dist/Draft.css';
 import Toolbar from "../components/ToolBar";
 import axios from "axios";
 import { ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
-const MyPostsPage = () => {
+const PostPage = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [title, setTitle] = useState(null);
   const nav = useNavigate();
   const [cookies] = useCookies(['token']);
-  
+ const {id} = useParams();
+ console.log(id);
   const verifyCookie = () => {
     if (!cookies.token) {
       nav('/signin');
@@ -50,13 +51,13 @@ const MyPostsPage = () => {
 
   const fetchPostContent = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/myposts', {
+      const response = await axios.get(`http://localhost:8080/api/posts/${id}`, {
         withCredentials: true,
       });
       console.log(response)
       if (!response.data.post || !response.data.post.content) {
         console.warn("Post content is missing or empty");
-        return; // Or handle this case as needed
+        return; 
       }
   
       const rawContent = response.data.post.content;
@@ -66,7 +67,7 @@ const MyPostsPage = () => {
         parsedContent = JSON.parse(rawContent);
       } catch (e) {
         console.error("Error parsing JSON:", e);
-        return; // Handle JSON parsing errors
+        return; 
       }
   
       const contentState = convertFromRaw(parsedContent);
@@ -81,7 +82,7 @@ const MyPostsPage = () => {
   useEffect(() => {
     verifyCookie();
     fetchPostContent();
-  }, [cookies.token, nav]); // Add dependencies to re-run effect on token change
+  }, [cookies.token, nav]);
 
   return (
     <>
@@ -94,14 +95,10 @@ const MyPostsPage = () => {
             </div>
             <h2 className="text-center lg:text-2xl font-extrabold">My Posts</h2>
           </div>
-          <div className="row-span-1 row-start-3 lg:row-start-2 p-1 px-2 flex items-center gap-2 bg-shader-gradient z-10 border-b">
-            {/* Add any additional content or functionality here */}
-          </div>
+         
 
-          <div className="row-span-1 row-start-3 lg:row-start-3 p-1 px-2 flex items-center gap-2 bg-shader-gradient z-20">
-            {/* Add any additional content or functionality here */}
-          </div>
-          <div className="row-span-8 row-start-4 lg:row-start-4 flex flex-col gap-2 p-1 overflow-y-auto scroll-smooth z-10">
+
+          <div className="row-span-8 row-start-3 lg:row-start-2 flex flex-col gap-2 p-1 overflow-y-auto scroll-smooth z-10">
             <Editor
               editorState={editorState}
               onChange={setEditorState}
@@ -132,4 +129,4 @@ const Media = (props) => {
   return media;
 };
 
-export default MyPostsPage;
+export default PostPage;

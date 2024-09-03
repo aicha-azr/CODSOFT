@@ -100,7 +100,7 @@ setPosts(response.data.posts);
           {posts.length > 0 ? posts.map((item, index) => {
               const firstImage = extractFirstImage(item.content); // Extract the first image
               return (
-                <div className="bg-white bg-gradient-to-r from-white to-gray-100 flex flex-col h-fit p-4 rounded-xl shadow-light shadow-lg gap-2 backdrop-grayscale-0" key={index}>
+                <div className="bg-white bg-gradient-to-r from-white to-gray-100 flex flex-col h-fit p-4 rounded-xl shadow-light shadow-lg gap-2 backdrop-grayscale-0" key={item._id} onClick={()=>nav(`/posts/${item._id}`)}>
                   <div className="flex gap-2">
                     <div className="rounded-full bg-gray-200 flex items-center"><CircleUser size={20} /></div>
                     <div className="rounded-full self-center flex items-center">{item.author.name}</div>
