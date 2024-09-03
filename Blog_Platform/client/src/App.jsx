@@ -10,6 +10,7 @@ import MyPostsPage from './pages/MyPostsPage';
 import ProfilePage from './pages/ProfilePage';
 import PostPage from './pages/Post';
 import Test from './pages/Test';
+import UpdatePostPage from './pages/UpdatePostPage';
 function App() {
   if (typeof global === 'undefined') {
     window.global = window;
@@ -25,6 +26,7 @@ function App() {
         <Route path='/myPosts' element={<MyPostsPage/>} />
         <Route path='/profile' element={<ProfilePage/>} />
         <Route path='/posts/:id' element={<PostPage/>} />
+        <Route path='/posts/update/:id' element={<UpdatePostPage/>} />
         <Route path='/test' element={<Test/>} />
 
       </Routes>

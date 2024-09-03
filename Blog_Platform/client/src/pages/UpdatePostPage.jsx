@@ -7,8 +7,9 @@ import axios from "axios";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCookies } from "react-cookie";
+const UpdatePostPage = ()=>{
 
-const PostPage = () => {
+
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [title, setTitle] = useState(null);
   const nav = useNavigate();
@@ -127,4 +128,5 @@ const Media = (props) => {
   return media;
 };
 
-export default PostPage;
+
+export default UpdatePostPage;

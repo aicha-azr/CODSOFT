@@ -1,15 +1,21 @@
 import { ChevronDown, CirclePlus, CircleUserRound, LogOut, StickyNote } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 const SideBar = ({page}) => {
+    const nav = useNavigate();
+  const [cookies, removeCookie] = useCookies(['token']);
     const [menu, setMenu] = useState(false);
     const isCurrentPage = (pageName) => page === pageName;
-    const nav = useNavigate();
     const handleNavigation = (path) => {
-        console.log(`Navigating to ${path}`); // Debugging line
+        console.log(`Navigating to ${path}`); 
         nav(path);
     };
+    const handleLogout = () => {
+        removeCookie('token', { path: '/' }); 
+        nav('/signin'); 
+      };
     return (
         <div className="fixed lg:h-screen h-fit right-0 left-0 lg:relative lg:grid lg:col-span-2 col-span-1 bg-white grid-rows-10 gap-8 shadow-r rounded-r-lg shadow-md row-start-0 row-span-1 col-span-10 z-30">
             <div className="font-bold lg:text-2xl text-xl row-span-2 border-b text-start self-center lg:pb-5 flex items-center justify-between lg:justify-center p-2 py-4 z-20">
@@ -33,7 +39,7 @@ const SideBar = ({page}) => {
                 <li className={`shadow-md p-2 flex items-center gap-2.5 rounded-2xl ${isCurrentPage('myPosts') ? 'bg-gray-200' : 'bg-altBackground'} font-medium cursor-pointer hover:bg-gray-200 hover:shadow-md`} onClick={() => handleNavigation('/myPosts')}>
                     <StickyNote size={30}/> My posts
                 </li>
-                <li className="shadow-md p-2 flex items-center gap-2.5 rounded-2xl bg-altBackground font-medium cursor-pointer hover:bg-gray-200 hover:shadow-md">
+                <li className="shadow-md p-2 flex items-center gap-2.5 rounded-2xl bg-altBackground font-medium cursor-pointer hover:bg-gray-200 hover:shadow-md" onClick={handleLogout}>
                     <LogOut size={30}/> Log out
                 </li>
             </ol>
