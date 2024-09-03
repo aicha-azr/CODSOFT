@@ -89,6 +89,7 @@ setPosts(response.data.posts);
        top: 0,
      }}
    >
+    
      <ShaderGradient
        control='query'
        urlString='https://www.shadergradient.co/customize?animate=on&axesHelper=off&brightness=1.2&cAzimuthAngle=170&cDistance=4.4&cPolarAngle=70&cameraZoom=1&color1=%2394ffd1&color2=%236bf5ff&color3=%23ffffff&destination=onCanvas&embedMode=off&envPreset=city&format=gif&fov=45&frameRate=10&gizmoHelper=hide&grain=off&lightType=3d&pixelDensity=1&positionX=0&positionY=0.9&positionZ=-0.3&range=enabled&rangeEnd=40&rangeStart=0&reflection=0.1&rotationX=45&rotationY=0&rotationZ=0&shader=defaults&type=waterPlane&uAmplitude=0&uDensity=1.2&uFrequency=0&uSpeed=0.2&uStrength=3.4&uTime=0&wireframe=false'
@@ -100,13 +101,13 @@ setPosts(response.data.posts);
           {posts.length > 0 ? posts.map((item, index) => {
               const firstImage = extractFirstImage(item.content); // Extract the first image
               return (
-                <div className="bg-white bg-gradient-to-r from-white to-gray-100 flex flex-col h-fit p-4 rounded-xl shadow-light shadow-lg gap-2 backdrop-grayscale-0" key={item._id} onClick={()=>nav(`/posts/${item._id}`)}>
-                  <div className="flex gap-2">
+                <div className="bg-white bg-gradient-to-r from-white to-gray-100 flex flex-col h-fit p-4 rounded-xl shadow-light shadow-lg gap-2 backdrop-grayscale-0 " key={item._id} onClick={()=>nav(`/posts/${item._id}`)}>
+                  <div className="flex gap-2 border-b ">
                     <div className="rounded-full bg-gray-200 flex items-center"><CircleUser size={20} /></div>
                     <div className="rounded-full self-center flex items-center">{item.author.name}</div>
                   </div>
                   <div className="w-full px-5 flex flex-col md:flex-row items-center gap-1.5 text-start">
-                    <div className="h-fit w-full  rounded-full flex items-center"><h2 className="font-bold text-lg">{item.title}</h2></div>
+                    <div className="h-fit w-full  rounded-full flex self-start"><h2 className="font-bold text-lg ">{item.title}</h2></div>
                     <div className={`h-[12rem] w-full rounded-xl flex items-center justify-center ${firstImage ? '' : 'hidden'}`}>
                       {firstImage?(<img src={firstImage} alt={item.title} className="h-full w-full object-full " />):""}
                     </div>

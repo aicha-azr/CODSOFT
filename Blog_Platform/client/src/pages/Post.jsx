@@ -123,7 +123,7 @@ const Media = (props) => {
 
   let media;
   if (type === 'IMAGE') {
-    media = <img src={src} alt="" style={{ maxWidth: '30%' }} />;
+    media = <img src={src} alt="" className="w-full h-40  lg:h-[20rem] object-fill"  />;
   }
 
   return media;

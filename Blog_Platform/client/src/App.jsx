@@ -9,6 +9,7 @@ import 'global';
 import MyPostsPage from './pages/MyPostsPage';
 import ProfilePage from './pages/ProfilePage';
 import PostPage from './pages/Post';
+import Test from './pages/Test';
 function App() {
   if (typeof global === 'undefined') {
     window.global = window;
@@ -24,6 +25,8 @@ function App() {
         <Route path='/myPosts' element={<MyPostsPage/>} />
         <Route path='/profile' element={<ProfilePage/>} />
         <Route path='/posts/:id' element={<PostPage/>} />
+        <Route path='/test' element={<Test/>} />
+
       </Routes>
     </Router>
   );

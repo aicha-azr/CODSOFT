@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
+import { ArrowLeft } from "lucide-react";
 
 const LoginPage = ()=>{
     const nav = useNavigate();
@@ -51,7 +52,7 @@ const LoginPage = ()=>{
     <div className="z-10 fixed w-full right-0 left-0">
      <NavBar/>    
     </div>
-    <div className="flex flex-col gap-2 justify-center items-center w-full h-full ">
+    <div className="flex flex-col gap-2 justify-center items-center w-full h-full relative ">
         <h2 className="font-semibold text-2xl ">Sign in</h2>
     <form action="" className=" flex flex-col w-1/3  items-center justify-center gap-3 p-2" onSubmit={userLogin}>
         <label className="self-start font-semibold">Email:</label>
@@ -61,6 +62,9 @@ const LoginPage = ()=>{
         <button type="submit" className="bg-gradient-to-r from-green-500 to-green-400 text-white text-white rounded-xl hover:bg-[#059669] w-full mt-3 shadow-md hover:bg-gradient-to-r hover:from-green-600 hover:to-green-500 focus:outline-none">Sign in</button>
         <p className="font-medium text-sm">You don't have an account?  <span className="font-semibold text-primary cursor-pointer hover:underline" onClick={()=>nav('/signup')}>Sing up</span></p>
     </form>
+    <div className="absolute left-1 top-11 mt-10 font-bold bg-white rounded-full p-1 shadow-light shadow-md text-textPrimary" onClick={() => nav('/')}>
+              <ArrowLeft />
+            </div>
    </div>
      </div>
      <ToastContainer position="top-center" transition={Bounce}/>

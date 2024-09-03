@@ -4,7 +4,7 @@ import { Editor, EditorState, RichUtils, AtomicBlockUtils, convertToRaw, convert
 import 'draft-js/dist/Draft.css';
 import Toolbar from "../components/ToolBar";
 import axios from "axios";
-import { ArrowLeft, CircleUser } from "lucide-react";
+import { ArrowLeft, CircleUser, EllipsisVertical } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Card from "../components/Card";
@@ -15,6 +15,7 @@ const MyPostsPage = () => {
   const nav = useNavigate();
   const [cookies] = useCookies(['token']);
   const [posts, setPosts] = useState([]);
+  const [openMenu, setOpenMenu] = useState(null)
   const verifyCookie = () => {
     if (!cookies.token) {
       nav('/signin');
@@ -102,7 +103,7 @@ const extractFirstImage = (content) => {
           {posts.length > 0 ? posts.map((item, index) => {
               const firstImage = extractFirstImage(item.content); // Extract the first image
               return (
-                <div className="bg-white bg-gradient-to-r from-white to-gray-100 flex flex-col h-fit p-4 rounded-xl shadow-light shadow-lg gap-2 backdrop-grayscale-0" key={index}>
+                <div className="bg-white bg-gradient-to-r from-white to-gray-100 flex flex-col h-fit p-4 rounded-xl shadow-light shadow-lg gap-2 backdrop-grayscale-0 relative" key={item._id} onClick={()=>nav(`/posts/${item._id}`)}>
                   <div className="flex gap-2">
                     <div className="rounded-full bg-gray-200 flex items-center"><CircleUser size={20} /></div>
                     <div className="rounded-full self-center flex items-center">{item.author.name}</div>
@@ -112,6 +113,9 @@ const extractFirstImage = (content) => {
                     <div className={`h-[12rem] w-full rounded-xl flex items-center justify-center ${firstImage ? '' : 'hidden'}`}>
                       {firstImage?(<img src={firstImage} alt={item.title} className="h-full w-full object-full " />):""}
                     </div>
+                  </div>
+                  <div className="absolute top-2 right-3  bg-gray-200 rounded-full p-1">
+                  <EllipsisVertical />
                   </div>
                 </div>
               );

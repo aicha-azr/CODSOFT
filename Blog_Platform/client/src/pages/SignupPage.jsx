@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useState } from "react";
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ArrowLeft } from "lucide-react";
+
 const SignupPage = ()=>{
   const nav = useNavigate();
   const [userData, setUserData] = useState({
@@ -41,7 +43,7 @@ const userRegistration = async(e)=>{
 }
 
  return(<>
-    <div className="w-screen  fixed top-0 right-0 left-0 px-2 overflow-y-auto scroll-smooth h-screen bg-radial-gradient bg-cover flex flex-col font-sans"  style={{
+    <div className="w-screen  fixed top-0 right-0 left-0 px-2 overflow-y-auto scroll-smooth h-screen bg-radial-gradient bg-cover flex flex-col font-sans "  style={{
     width: '100%',
     height: '100%',
     backgroundColor: '#F3F4F6',
@@ -52,7 +54,7 @@ const userRegistration = async(e)=>{
     <div className="z-10 fixed w-full right-0 left-0">
      <NavBar/>    
     </div>
-    <div className="flex flex-col gap-2 justify-center items-center w-full h-full ">
+    <div className="flex flex-col gap-2 justify-center items-center w-full h-full relative">
         <h2 className="font-semibold text-2xl ">Sign Up</h2>
     <form action="" className=" flex flex-col w-1/3  items-center justify-center gap-3 p-2" onSubmit={userRegistration}>
         <label className="self-start font-semibold">Name:</label>
@@ -67,6 +69,9 @@ const userRegistration = async(e)=>{
     {error && (<p className="text-error text-lg">
       {error}
     </p>)}
+   <div className="absolute left-1 top-11 mt-10 font-bold bg-white rounded-full p-1 shadow-light shadow-md text-textPrimary" onClick={() => nav('/')}>
+              <ArrowLeft />
+            </div>
    </div>
      </div>
      <ToastContainer position="top-center" transition={Bounce}/>
