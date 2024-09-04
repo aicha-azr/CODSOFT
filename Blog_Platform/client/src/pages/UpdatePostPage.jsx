@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import SideBar from "../components/SideBar";
 import { Editor, EditorState, RichUtils, AtomicBlockUtils, convertToRaw, convertFromRaw } from 'draft-js';
 import 'draft-js/dist/Draft.css';
-import Toolbar from "../components/ToolBar";
 import axios from "axios";
-import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCookies } from "react-cookie";
-const UpdatePostPage = ()=>{
-
-
+import ToolBar from "../components/ToolBar";
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+const PostPage = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [title, setTitle] = useState(null);
   const nav = useNavigate();
@@ -21,7 +20,7 @@ const UpdatePostPage = ()=>{
       nav('/signin');
     }
   };
-
+const updateNotification = ()=> toast.success('post updated');
   const handleKeyCommand = (command) => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
@@ -60,7 +59,7 @@ const UpdatePostPage = ()=>{
         console.warn("Post content is missing or empty");
         return; 
       }
-  
+      setTitle(response.data.post.title)
       const rawContent = response.data.post.content;
       let parsedContent;
   
@@ -77,8 +76,34 @@ const UpdatePostPage = ()=>{
       console.error("Error fetching post content:", error);
     }
   };
-  
-  
+  const handleImageUpload = async (event) => {
+    const files = Array.from(event.target.files);
+    const uploadedImages = await Promise.all(files.map(file => uploadImageToServer(file)));
+
+    uploadedImages.forEach(url => {
+      const contentState = editorState.getCurrentContent();
+      const contentStateWithEntity = contentState.createEntity('IMAGE', 'IMMUTABLE', { src: url });
+      const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+      const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
+      setEditorState(AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '));
+    });
+  };
+  const UpdatePost = async()=>{
+    const postData = {
+      content: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
+      title: title,
+    };
+    try{
+
+      const response = await axios.put(`http://localhost:8080/api/posts/${id}`, postData, {
+        withCredentials: true, 
+      });
+      console.log(response.data);
+      updateNotification();
+    }catch(e){
+      console.log('error:',e)
+    }
+  }
 
   useEffect(() => {
     verifyCookie();
@@ -89,15 +114,17 @@ const UpdatePostPage = ()=>{
     <>
       <div className="w-screen fixed top-0 right-0 left-0 overflow-y-auto scroll-smooth h-screen max-h-fit border border-blue-300 bg-altBackground flex flex-col font-sans grid grid-cols-10 gap-2 grid-rows-10">
         <SideBar page="myPosts" />
-        <div className="h-screen max-h-fit lg:col-span-8 col-span-10 grid grid-rows-10 col-start-1 z-10">
-          <div className="row-span-1 row-start-2 py-5 lg:row-start-1 flex justify-center items-center bg-shader-gradient relative border-b">
+        <div className="h-screen max-h-fit lg:col-span-8 col-span-10 grid grid-rows-10 col-start-1 z-10 relative w-full">
+          <div className="row-span-1 row-start-2 py-5 lg:row-start-1 flex justify-start items-center bg-shader-gradient relative border-b w-full">
+           <input type="text" value={title} onChange={(e)=>setTitle(e.target.value)} className="focus:outline-none bg-transparent font-bold w-full lg:text-2xl" />
            
-            <h2 className="text-center lg:text-2xl font-extrabold">My Posts</h2>
           </div>
          
+          <div className="row-span-1 row-start-4 lg:row-start-2 p-1 px-2 flex items-center gap-2 bg-shader-gradient z-20">
+            <ToolBar editorState={editorState} setEditorState={setEditorState} addImage={handleImageUpload} />
+          </div>
 
-
-          <div className="row-span-8 row-start-3 lg:row-start-2 flex flex-col gap-2 p-1 overflow-y-auto scroll-smooth z-10">
+          <div className="row-span-8 row-start-3 lg:row-start-3 flex flex-col gap-2 p-1 overflow-y-auto scroll-smooth z-10">
             <Editor
               editorState={editorState}
               onChange={setEditorState}
@@ -105,11 +132,13 @@ const UpdatePostPage = ()=>{
               blockRendererFn={blockRendererFn}
               blockStyleFn={blockStyleFn}
               placeholder="Write something..."
-              readOnly={true} // Make the editor read-only
+              
             />
           </div>
+          <button  className="absolute right-0 bottom-0 w-full p-2 mb-1 mx-1 bg-blue-500 text-white rounded z-20" onClick={UpdatePost}>Update Post</button>
         </div>
       </div>
+      <ToastContainer/>
     </>
   );
 };
@@ -128,5 +157,4 @@ const Media = (props) => {
   return media;
 };
 
-
-export default UpdatePostPage;
+export default PostPage;

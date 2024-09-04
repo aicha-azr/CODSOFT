@@ -81,7 +81,7 @@ setPosts(response.data.posts);
           </div>
 
            
-
+{/*
             <ShaderGradientCanvas
      importedFiber={{ ...fiber, ...drei, ...reactSpring }}
      style={{
@@ -96,6 +96,7 @@ setPosts(response.data.posts);
        className="absolute top-0 right-0 left-0 bg-cover blur-lg  z-0 w-full"
      />
    </ShaderGradientCanvas>
+   */}
 
           <div className="row-span-9 row-start-3 lg:row-start-2  flex flex-col gap-2  p-1 overflow-y-auto scroll-smooth z-10 ">
           {posts.length > 0 ? posts.map((item, index) => {

@@ -3,7 +3,7 @@ import logo from '../assets/Designer.png';
 const NavBar = ()=>{
     const nav = useNavigate();
 return(<>
-    <div className="flex justify-between items-center w-full rounded-md px-3 py-1.5   shadow-md text-textPrimary bg-white opacity-90">
+    <div className="flex justify-between items-center w-full rounded-md px-3 py-1.5   shadow-md text-textPrimary bg-white ">
         <div className='flex gap-1 items-center'>
             <img src={logo} alt="logo" width={40} height={40} className='rounded-full' />
             <h2 className='font-bold text-xl'>TechBLog</h2>

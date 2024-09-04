@@ -116,7 +116,7 @@ console.log(JSON.stringify(convertToRaw(editorState.getCurrentContent())))
       await axios.post('http://localhost:8080/api/posts', postData, {
         withCredentials: true, 
       });
-      alert('Post submitted successfully');
+      //alert('Post submitted successfully');
       notifySuccess('Post submitted successfully');
     } catch (error) {
       console.error("Error submitting post", error);

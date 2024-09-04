@@ -144,7 +144,7 @@ const deletePost = async()=>{
                   </div>
                   {openMenu && activeMenuId === item._id && (
         <div className="flex flex-col gap-1 rounded py-1 bg-gray-200 text-textSecondary absolute right-1 top-11">
-          <button className="focus:outline-none border-none p-1 bg-transparent hover:bg-yellow-200 px-3 font-bold">
+          <button className="focus:outline-none border-none p-1 bg-transparent hover:bg-yellow-200 px-3 font-bold" onClick={()=>nav(`/posts/update/${item._id}`)}>
             Update
           </button>
           <button className="focus:outline-none border-none p-1 bg-transparent hover:bg-red-200 px-3 font-bold" onClick={()=>setDeleteMenu(!deleteMenu)}>
@@ -165,7 +165,7 @@ const deletePost = async()=>{
           {
         deleteMenu && (<>
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-       <div className="bg-white shadow-md p-4 rounded-lg lg:absolute lg:right-66">
+       <div className="bg-white shadow-md p-4 rounded-lg lg:absolute lg:right-66 gap-2">
             <h2>Do you really want to delete this post</h2>
             <div className="flex gap-3 items-center justify-center">
               <button className="focus:outline-none  rounded-md p-1 px-4 hover:bg-red-200" onClick={()=>{deletePost();

@@ -59,7 +59,7 @@ const PostPage = () => {
         console.warn("Post content is missing or empty");
         return; 
       }
-  
+      setTitle(response.data.post.title)
       const rawContent = response.data.post.content;
       let parsedContent;
   
@@ -76,7 +76,13 @@ const PostPage = () => {
       console.error("Error fetching post content:", error);
     }
   };
-  
+  const updatePost = async()=>{
+    try{
+      const response = await axios.put(`http://localhost:8080/api/posts/${id}`)
+    }catch(e){
+      console.log('error:', e)
+    }
+  }
   
 
   useEffect(() => {
@@ -89,9 +95,9 @@ const PostPage = () => {
       <div className="w-screen fixed top-0 right-0 left-0 overflow-y-auto scroll-smooth h-screen max-h-fit border border-blue-300 bg-altBackground flex flex-col font-sans grid grid-cols-10 gap-2 grid-rows-10">
         <SideBar page="myPosts" />
         <div className="h-screen max-h-fit lg:col-span-8 col-span-10 grid grid-rows-10 col-start-1 z-10">
-          <div className="row-span-1 row-start-2 py-5 lg:row-start-1 flex justify-center items-center bg-shader-gradient relative border-b">
+          <div className="row-span-1 row-start-2 py-5 lg:row-start-1 flex justify-start items-center bg-shader-gradient relative border-b">
            
-            <h2 className="text-center lg:text-2xl font-extrabold">My Posts</h2>
+            <h2 className="text-center lg:text-2xl font-extrabold ">{title}</h2>
           </div>
          
 
