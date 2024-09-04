@@ -5,8 +5,19 @@ import * as reactSpring from '@react-spring/three'
 import * as drei from '@react-three/drei'
 import * as fiber from '@react-three/fiber'
 import { useNavigate } from "react-router-dom";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
+
 const LandingPage = ()=>{
 const nav = useNavigate();
+useEffect(() => {
+  AOS.init({
+    duration: 1000, // Durée de l'animation en millisecondes
+    once: true, // Animer une seule fois lors du défilement
+  });
+}, []);
+
 return(<>
 <div className="w-screen fixed top-0 right-0 left-0 px-2 overflow-y-auto scroll-smooth h-screen bg-radial-gradient bg-cover"  style={{
     width: '100%',
@@ -22,11 +33,11 @@ return(<>
    
    <div className="flex justify-center items-center w-full h-full z-10 relative" id="home">
    <div className="flex flex-col justify-around py-20 h-full self-center items-center w-1/2 text-textPrimary gap-9">
-   <div className="flex flex-col justify-between h-1/2 p-3"> 
-    <h1 className="font-bold ">Stay Ahead in Tech Innovation</h1>
-    <h2 className="font-semibold text-lg">Your go-to source for the latest trends, insights, and tutorials in the world of technology.</h2>
+   <div className="flex flex-col justify-between h-1/2 p-3 gap-10"> 
+    <h1 className="font-bold " data-aos="zoom-in">Stay Ahead in Tech Innovation</h1>
+    <h2 className="font-semibold text-lg mt-5" data-aos="zoom-in">Your go-to source for the latest trends, insights, and tutorials in the world of technology.</h2>
     </div>
-    <button className="bg-accent text-white py-3 px-6 rounded-full hover:bg-[#059669] w-fit ml-3 shadow-md" onClick={()=>nav('/signup')}>Explore Now</button>
+    <button className="bg-accent text-white py-3 px-6 rounded-full hover:bg-[#059669] w-fit ml-3 shadow-md" onClick={()=>nav('/signup')}data-aos="fade-up">Explore Now</button>
    </div>
   {/* <div className=" w-1/2 flex flex-col justify-center items-center gap-4">
         <div className="  h-40 w-[350px] bg-textSecondary rounded-3xl shadow-lg  -skew-y-6 animate-pulse"></div>
