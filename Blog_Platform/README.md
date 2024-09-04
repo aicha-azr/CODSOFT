@@ -24,7 +24,7 @@ Follow these steps to set up the project locally:
 ### Clone the Repository
 
 ```bash
-git clone [https://github.com/yourusername/tech-blog-platform.git](https://github.com/aicha-azr/CODSOFT.git)
+git clone https://github.com/aicha-azr/CODSOFT.git
 cd CODSOFT/Blog_Platform
 ```
 ### Install Dependencies
