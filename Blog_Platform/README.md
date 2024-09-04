@@ -1,6 +1,6 @@
 # Tech Blog Platform
 
-A modern and simple tech blog platform built with the MERN stack, featuring a rich text editor, image uploading, and JWT authentication. The platform allows users to create, update, and manage blog posts seamlessly.
+A simple tech blog platform built with the MERN stack, featuring a rich text editor, image uploading, and JWT authentication. The platform allows users to create, update, and manage blog posts seamlessly.
 
 ## 🚀 Features
 
@@ -20,13 +20,12 @@ Follow these steps to set up the project locally:
 
 - Node.js (>= 14.x)
 - MongoDB
-- npm or yarn
 
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/tech-blog-platform.git
-cd tech-blog-platform
+git clone [https://github.com/yourusername/tech-blog-platform.git](https://github.com/aicha-azr/CODSOFT.git)
+cd CODSOFT/Blog_Platform
 ```
 ### Install Dependencies
 ```bash
@@ -40,13 +39,13 @@ JWT_SECRET=your_jwt_secret
 ```
 ### Run the Development Server
 ```bash
-npm run dev
+npm start
 ```
 ## 🎨 Usage
 ### Creating and Editing Posts
 * Navigate to the "My Posts" section using the sidebar.
 * Click on "Create Post" to start a new blog post.
-Use the toolbar to format your text and embed images.
+* Use the toolbar to format your text and embed images.
 * Click "Update Post" to save your changes.
 ### Authentication
 * Sign in using your credentials to access the dashboard.
