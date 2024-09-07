@@ -36,7 +36,7 @@ const Home = ()=>{
             Hello! I'm <span className="text-clip overflow-hidden  text-transparent bg-clip-text bg-gradient-to-tr from-[#cf9495] to-[#ecc2bd]  overflow-hidden">Aicha</span>,</h2>
             <h2 className="max-w-xl  text-2xl font-extrabold tracking-tight leading-none md:text-2xl xl:text-2xl text-green animate-trackingInContract" data-aos="fade-right">
             a <span className="animate-textAni">Full-Stack Developer</span> Specializing in <span className="animate-textAni">MERN Stack</span></h2>
-            <p className="max-w-2xl mb-6 font-light text-[#023246] lg:mb-8 md:text-lg lg:text-xl text-black z-10 font-medium " data-aos="fade-up">
+            <p className="max-w-2xl mb-6 font-light text-[#023246] lg:mb-8 md:text-lg lg:text-xl z-10 font-medium " data-aos="fade-up">
             As a passionate and dedicated Junior Full Stack Developer, I focus on the MERN stack, which includes MongoDB, Express.js, React.js, and Node.js. I'm committed to crafting dynamic, high-performance web applications that meet client expectations.
             </p>
           
