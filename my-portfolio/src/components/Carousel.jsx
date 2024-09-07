@@ -31,7 +31,7 @@ const filtrage = (value) => {
         <p className={`focus:outline-none p-1 hover:text-b1 hover:bg-gray-200 hover:cursor-pointer p-2 rounded-full ${clickedEvent === 'All'?'bg-gray-200 text-b1':'bg-transparent'}`} onClick={() => filtrage("All")}>All</p>
         <p className={`focus:outline-none p-1 hover:text-b1 hover:bg-gray-200 hover:cursor-pointer p-2 rounded-full ${clickedEvent === 'Full Stack'?'bg-gray-200 text-b1':'bg-transparent'}`} onClick={() => filtrage("Full Stack")
         }>Full Stack</p>
-        <p className={`focus:outline-none p-1 hover:text-b1[#F564AB] hover:bg-gray-200 hover:bg-gray-200 hover:cursor-pointer p-2 rounded-full ${clickedEvent === 'Frontend'?'bg-gray-200 text-b1':'bg-transparent'}`} onClick={() => filtrage("Frontend")}>Frontend</p>
+        <p className={`focus:outline-none p-1 hover:text-b1 [#F564AB] hover:bg-gray-200 hover:bg-gray-200 hover:cursor-pointer p-2 rounded-full ${clickedEvent === 'Frontend'?'bg-gray-200 text-b1':'bg-transparent'}`} onClick={() => filtrage("Frontend")}>Frontend</p>
         <p className={`focus:outline-none p-1 hover:text-b1 hover:bg-gray-200 hover:cursor-pointer p-2 rounded-full ${clickedEvent === 'Backend'?'bg-gray-200 text-b1':'bg-transparent'}`} onClick={() => filtrage("Backend")}>Backend</p>
         </div>
     <div className="  flex flex-wrap flex-row md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 p-3 items-start w-fit justify-start ">
@@ -47,7 +47,7 @@ const filtrage = (value) => {
                     <img
                         src={item.image}
                         alt={item.title}
-                        className="shadow-md rounded-lg w-full h-full "
+                        className="shadow-md rounded-lg w-full h-full transition duration-300 delay-150 hover:delay-300 hover:-translate-y-1 hover:scale-110 "
                     /> </div>
                     <div className="flex flex-col text-start px-2">
                     <h3 className={'text-BRoyal md:text-xl bg-brightness-50  font-semibold'}>{item.title}</h3>

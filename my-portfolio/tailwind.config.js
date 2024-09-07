@@ -16,6 +16,7 @@ module.exports = withMT({
         moveY: 'marquee 20s ease-in-out infinite',
         trackingInContract: 'trackingInContract 2s cubic-bezier(.25,.46,.45,.94) both',
         textAni: 'textAni 2s infinite both',
+        fadeRight: 'fadeRight 1s ease-out',
       },
       keyframes: {
         marquee: {
@@ -31,6 +32,10 @@ module.exports = withMT({
             filter:'blur(12px)',
             opacity:'0'},
             '100%':{filter:'blur(0)',opacity:'1'},
+        },
+        fadeRight: {
+          '0%': { opacity: '0', transform: 'translateX(-20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
         },
         textAni:{
           '0%':{

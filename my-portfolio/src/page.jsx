@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -8,21 +8,38 @@ import SideBar from './components/SideBar';
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
+import AOS from 'aos';
+import "aos/dist/aos.css";
 
 function Page() {
+ 
+  useEffect(() => {
+    // Initialize AOS once in the main component
+    AOS.init({
+      duration: 1000,
+      easing: "ease-in-out",
+      once: true,
+    });
 
+    // Refresh AOS on page load
+    window.addEventListener('load', AOS.refresh);
+
+    return () => {
+      window.removeEventListener('load', AOS.refresh);
+    };
+  }, []);
   return (
     <> 
 
 
 
    <main className=' w-screen max-w-full h-full left-0 right-0 top-0   flex  justify-center fixed px-1 overflow-y-scroll scroll-smooth '>
-    <div className='flex flex-col justify-center h-fit px-1 w-full'>
+    <div className='flex flex-col justify-center gap-4 h-fit px-1 w-full'>
     <SideBar/>
 
 
   <Home/>
-  <About />
+  <About/>
   <Projects />
   <Contact />
     </div>
